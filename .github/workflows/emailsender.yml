@@ -1,0 +1,27 @@
+name: "Email sender demo"
+run-name: "Email sender demo"
+
+on:
+    push:
+        branches:
+            - main
+
+jobs:
+    send_email:
+        runs-on: ubuntu-latest
+        steps:
+            - name: "Checkout branch"
+              uses: actions/checkout@v4
+
+            - name: "Install python"
+              uses: actions/setup-python@v5
+              with:
+               python-version: '3.13'
+            - name: "Send mail execute python script "
+              run: python sendmail.py
+              env:
+                WORKFLOW_NAME: ${{ github.workflow}}
+                REPO_NAME: ${{ github.repository}}
+                EMAIL: ${{ secrets.DEMOEMAIL}} #here replicating using some values from secret github
+                USERNAME: ${{ secrets.DEMOUSER}}
+            
