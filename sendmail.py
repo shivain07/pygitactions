@@ -1,1 +1,1 @@
-print("hello")
+print("hello script print from actions")
